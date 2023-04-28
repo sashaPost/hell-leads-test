@@ -25,5 +25,5 @@ Route::post('/create_lead', [LeadController::class, 'createLeadFirst']);
 Route::post('/get-lead-status', [LeadController::class, 'getLeadStatus']);
 
 Route::middleware('verify.token')->prefix('v2')->group(function () {
-    Route::post('/create-lead', [LeadController::class, 'createLeadUpd']);
+    Route::post('/create_lead', [LeadController::class, 'createLeadUpd']);
 });
