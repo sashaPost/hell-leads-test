@@ -14,7 +14,7 @@ class LeadRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,6 +37,8 @@ class LeadRequest extends FormRequest
             'phone' => [
                 'required',
                 'string',
+                // change 'PhoneValidationRule' class to validate a phone number using regex
+                // add 'UkrPhoneValidation' to exclude ukrainian users 
                 new PhoneValidationRule,
                 // 'unique:users,phone',
                 'max:20',

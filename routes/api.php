@@ -19,5 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/create-lead', [LeadController::class, 'createLead']);
+Route::post('/create-lead', [LeadController::class, 'createLeadSecond']);
 Route::post('/get-lead-status', [LeadController::class, 'getLeadStatus']);
+
+Route::post('/create_lead', [LeadController::class, 'createLeadFirst']);
+
+Route::post('/test', [LeadController::class, 'test']);
+
+Route::get('/test2', [LeadController::class, 'test2']);

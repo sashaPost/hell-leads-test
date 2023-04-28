@@ -44,7 +44,7 @@ class SampleDataSeeder extends Seeder
 
         $request = LeadRequest::create(env('CREATE_LEAD_LINK'), 'POST', $data);
         $createRecordService = new CreateRecordService();
-        $controller = new LeadController($request, $createRecordService);
+        $controller = new LeadController($createRecordService);
         $controller->createLead($request);
     }
 }

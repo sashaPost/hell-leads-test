@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Lead;
+use App\Models\Token;
 use App\Models\User;
 
 class CreateRecordService 
@@ -17,6 +18,7 @@ class CreateRecordService
             'lastname' => $data['lastname'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'country' => $data['country'],
             'ip' => $data['ip'],
             'sub_id1' => $data['sub_id1'],
             'sub_id2' => $data['sub_id2'],
@@ -29,7 +31,7 @@ class CreateRecordService
     public function lead($data) {
         return Lead::create([
             'gi' => $data['gi'],
-            'token' => $data['token'],
+            'token' => $data->header('api-key'),
             'aff_param1' => $data['aff_param1'],
             'aff_param2' => $data['aff_param2'],
             'aff_param3' => $data['aff_param3'],
@@ -37,6 +39,4 @@ class CreateRecordService
             'aff_param5' => $data['aff_param5'],
         ]);
     }
-
-
 }

@@ -23,8 +23,6 @@ return new class extends Migration
             $table->string('aff_param3')->nullable(true)->default(null);   // description
             $table->string('aff_param4')->nullable(true)->default(null);   // FreeParam
             $table->string('aff_param5')->nullable(true)->default(null);   // FreeParam
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
