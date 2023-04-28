@@ -39,8 +39,6 @@ class LeadController extends Controller
                 ->orWhere('phone', $request['phone'])
                 ->first();
 
-        $firstname = $request['firstname'];
-
         // create a middleware for this check:
         if ($request->header('api-key') == $this->token) {
             if ( ! $existingUser) {
