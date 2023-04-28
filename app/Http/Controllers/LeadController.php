@@ -67,12 +67,10 @@ class LeadController extends Controller
                 ->orWhere('phone', $request['phone'])
                 ->first();
 
-        // create a middleware for this check:
         if ($request->header('api-key') == $this->token) {
             if ( ! $existingUser) {
                 $newUser = $this->createRecordService->user($request);
                 $newLead = $this->createRecordService->lead($request);
-                // $newUser->lead()->associate($newLead);
                 $newLead->associate($newUser);
                 $newLead->save();
 
