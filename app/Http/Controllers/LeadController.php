@@ -33,6 +33,34 @@ class LeadController extends Controller
         $this->getLeadStatusPath = env('GET_LEAD_STATUS_PATH');
     }
 
+    public function createLeadUpd(LeadRequest $request) {
+        $existingUser = User::where('email', $request['email'])
+                ->orWhere('phone', $request['phone'])
+                ->first();
+
+        if ( ! $existingUser) {
+            $newLead = $this->createRecordService->lead($request);
+            $newUser = $this->createRecordService->user($request);
+            $newUser->lead()->associate($newLead)->save();
+
+            return new JsonResponse([
+                'success' => true,
+                'message' => 'New record created.',
+                'lead' => $newLead,
+                'user' => $newUser,
+            ]);
+        }
+
+        return new JsonResponse([
+            'success' => false,
+            'message' => 'Record already exists.',
+            'lead' => $existingUser->lead,
+            'user' => $existingUser,
+        ]);
+    }
+
+
+
     public function createLeadFirst(LeadRequest $request) {
         
         $existingUser = User::where('email', $request['email'])
@@ -44,7 +72,9 @@ class LeadController extends Controller
             if ( ! $existingUser) {
                 $newUser = $this->createRecordService->user($request);
                 $newLead = $this->createRecordService->lead($request);
-                $newUser->lead()->associate($newLead);
+                // $newUser->lead()->associate($newLead);
+                $newLead->associate($newUser);
+                $newLead->save();
 
                 return new JsonResponse([
                     'success' => true,

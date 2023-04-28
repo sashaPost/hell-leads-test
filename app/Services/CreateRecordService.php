@@ -39,4 +39,25 @@ class CreateRecordService
             'aff_param5' => $data['aff_param5'],
         ]);
     }
+
+    public function userAndLead($data) {
+        $lead = $this->lead($data);
+        $user = $lead->user()->create([
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'country' => $data['country'],
+            'ip' => $data['ip'],
+            'sub_id1' => $data['sub_id1'],
+            'sub_id2' => $data['sub_id2'],
+            'sub_id3' => $data['sub_id3'],
+            'sub_id4' => $data['sub_id4'],
+            'sub_id5' => $data['sub_id5'],
+        ]);
+        return [
+            'user' => $user,
+            'lead' => $lead,
+        ];
+    }
 }

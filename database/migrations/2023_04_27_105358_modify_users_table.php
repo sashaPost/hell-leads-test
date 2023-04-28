@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('sub_id3')->nullable(true)->default(null);
             $table->string('sub_id4')->nullable(true)->default(null);
             $table->string('sub_id5')->nullable(true)->default(null);
+            $table->unsignedBigInteger('lead_id')->nullable(true)->default(null);
+            $table->foreign('lead_id')->references('id')->on('leads')->onDelete('cascade');
         });
     }
 
